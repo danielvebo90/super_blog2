@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2" id="initcard">
+
+      <h1><%=action%> Entrada</h1>
+
+        <% if @post.errors.any? %>
+          <div class="alert alert-danger">
+            <ul>
+            <% @post.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+      <%= form_for @post do |f| %>
+        <div class="form-group">
+          <%= f.text_field :title, class: "form-control input-lg", placeholder: "Ingresa el titulo" %>
+        </div>
+        <div class="form-group">
+          <%= f.text_area :body, class:"form-control", id:"FormControlTextarea1", rows:"10", placeholder: "Ingresa el contenido" %>
+        </div>
+        <%= hidden_field_tag "post[user_id]", current_user.id %>
+        <div>
+          <%= f.submit class:"btn"%>
+          <%= link_to 'Atras', posts_path, class:"btn" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
